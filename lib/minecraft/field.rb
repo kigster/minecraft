@@ -1,3 +1,4 @@
+require 'colored2'
 module MineCraft
   class Field
     attr_accessor :rows, :string, :big
@@ -26,12 +27,16 @@ module MineCraft
     def to_s
       out = ''
       rows.each_with_index do |row, y|
-        row.map { |v| v == -1 ? '▇' : (v == 0 ? '.' : v.to_s) }.each_with_index do |v, x|
+        row.map { |v| v == -1 ? ' ' : (v == 0 ? '.' : v.to_s) }.each_with_index do |v, x|
           out << (x == big.x && y == big.y ? 'X' : v)
         end
         out << "\n"
       end
       out
+    end
+
+    def to_s_colored
+      to_s.gsub(/ /, ' '.on.red).gsub(/X/, 'X'.white.on.red)
     end
 
     def value(x, y)

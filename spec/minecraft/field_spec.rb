@@ -53,8 +53,8 @@ X.1
 
     context 'with a mine with chain reaction' do
       let(:exploded) { <<-eof
-X▇▇
-▇▇▇
+X  
+   
 ...
       eof
       }

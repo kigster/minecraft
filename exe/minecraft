@@ -2,18 +2,18 @@
 lib_path = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH << lib_path if File.exist?(lib_path) && !$LOAD_PATH.include?(lib_path)
 
-require "minecraft"
+require 'minecraft'
 
 filename = ARGV.first
 
 if filename && File.exist?(filename)
   field = MineCraft::Field.new(File.read(filename))
-  puts "field with max: \n#{field.to_s}"
+  puts "field with the max:\n#{field.to_s_colored}"
   biggest = field.biggest
   puts "\nmax explosion: #{biggest}"
 
   field.explode(biggest.x, biggest.y)
-  puts "field after explosion: \n\n#{field.to_s}"
+  puts "field after explosion: \n\n#{field.to_s_colored}"
 
 else
   puts "file #{filename} is not found" if filename
