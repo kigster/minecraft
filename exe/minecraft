@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+lib_path = File.expand_path(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH << lib_path if File.exist?(lib_path) && !$LOAD_PATH.include?(lib_path)
+
+require "minecraft"
+
+filename = ARGV.first
+
+if filename && File.exist?(filename)
+  field = MineCraft::Field.new(File.read(filename))
+  puts "field with max: \n#{field.to_s}"
+  biggest = field.biggest
+  puts "\nmax explosion: #{biggest}"
+
+  field.explode(biggest.x, biggest.y)
+  puts "field after explosion: \n\n#{field.to_s}"
+
+else
+  puts "file #{filename} is not found" if filename
+  puts "usage: minecraft <file>"
+end
